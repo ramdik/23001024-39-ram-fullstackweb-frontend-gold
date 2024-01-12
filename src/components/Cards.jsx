@@ -14,7 +14,7 @@ const Cards = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         setBooks(data);
       })
       .catch((error) => {

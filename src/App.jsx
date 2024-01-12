@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx'
 import Login from "./pages/Login"
 import NavigationBar from './components/NavigationBar.jsx'
 import { Routes, Route } from "react-router-dom";
+import Admin from './pages/Admin.jsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="login" element={<Login />} />
+        <Route path="admin" element={<Admin />} />
       </Routes>
     </>
   )

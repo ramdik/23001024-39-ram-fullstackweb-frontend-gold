@@ -2,7 +2,7 @@ import Cards from '../components/Cards'
 
 const Home = () => {
     return (
-        <>
+        <div>
             <main className="site-main container px-5">
 
                 <div className="col mb-4 d-flex justify-content-center align-items-center border">
@@ -15,8 +15,8 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="p-2">
-                        <select className="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
+                        <select defaultValue="" className="form-select" aria-label="Default select example">
+                            <option value="0" selected>Open this select menu</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -31,7 +31,7 @@ const Home = () => {
                 </section>
 
             </main>
-        </>
+        </div>
     )
 }
 

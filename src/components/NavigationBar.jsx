@@ -16,6 +16,9 @@ return (
             <Link to="/login" className="nav-link">
               Login
             </Link>
+            <Link to="/admin" className="nav-link">
+              Admin Test
+            </Link>
             </Nav>
         </Container>
     </Navbar>

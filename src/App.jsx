@@ -7,6 +7,7 @@ import Login from "./pages/Login"
 import NavigationBar from './components/NavigationBar.jsx'
 import { Routes, Route } from "react-router-dom";
 import Admin from './pages/Admin.jsx'
+import CreateOffer from './pages/CreateOffer.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="admin" element={<Admin />} />
+        <Route path='add-offer' element={<CreateOffer/>}/>
       </Routes>
     </>
   )

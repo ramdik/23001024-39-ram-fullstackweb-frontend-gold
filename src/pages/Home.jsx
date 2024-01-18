@@ -26,8 +26,8 @@ const Home = () => {
 
                 <section className="section container-sm d-flex justify-content-between align-items-center flex-wrap">
                     <Cards />
-                    <Cards />
-                    <Cards />
+                    {/* <Cards />
+                    <Cards /> */}
                 </section>
 
             </main>

@@ -4,12 +4,12 @@ import "../assets/styles/global.css"
 
 
 const NavigationBars = () => {
-return (
-<div>
-    <Navbar className='navigation h-auto border'>
+  return (
+    <div>
+      <Navbar className='navigation h-auto border'>
         <Container>
-            <Navbar.Brand>Wedding Shop</Navbar.Brand>
-            <Nav>
+          <Navbar.Brand>Wedding Shop</Navbar.Brand>
+          <Nav>
             <Link to="/" className="nav-link">
               Home
             </Link>
@@ -19,11 +19,11 @@ return (
             <Link to="/admin" className="nav-link">
               Admin Test
             </Link>
-            </Nav>
+          </Nav>
         </Container>
-    </Navbar>
-</div>
-)
+      </Navbar>
+    </div>
+  )
 }
 
 export default NavigationBars;

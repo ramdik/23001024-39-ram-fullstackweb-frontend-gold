@@ -6,6 +6,7 @@ const Admin = () => {
   const [weddingOffers, setWeddingOffers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedWeddingOffer, setSelectedWeddingOffer] = useState({ id: null, userId: "", weddingOfferName: "", weddingOfferAuthor: "", weddingOfferPrice: "", weddingOfferDescription: "" });
+
   /* Pagination */
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -43,7 +44,7 @@ const Admin = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ weddingOfferName, weddingOfferPrice, weddingOfferDescription, weddingOfferImg }), // Only send the properties you want to update
+      body: JSON.stringify({ weddingOfferName, weddingOfferPrice, weddingOfferDescription, weddingOfferImg }), // Send the properties you want to update
     })
       .then((res) => {
         if (!res.ok) {
@@ -111,7 +112,7 @@ const Admin = () => {
       </Table>
 
       {/* Pagination */}
-      <Pagination>
+      {/* <Pagination>
         {Array.from({ length: Math.ceil(weddingOffers.length / itemsPerPage) }, (_, index) => (
           <Pagination.Item
             key={index + 1}
@@ -121,7 +122,7 @@ const Admin = () => {
             {index + 1}
           </Pagination.Item>
         ))}
-      </Pagination>
+      </Pagination> */}
 
       {/* Edit Modal */}
       <Modal show={showModal} onHide={handleModalClose}>
@@ -144,7 +145,7 @@ const Admin = () => {
                 placeholder="Author"
                 value={selectedWeddingOffer.weddingOfferAuthor}
                 onChange={(e) => setSelectedWeddingOffer({ ...selectedWeddingOffer, weddingOfferAuthor: e.target.value })}
-                //disabled
+                disabled
               />
               <Form.Label>Offer Name</Form.Label>
               <Form.Control
@@ -187,9 +188,6 @@ const Admin = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      {/* AddOfferModal */}
-      {/* <AddOfferModal showModal={showModal} onClose={handleModalClose} onAddOffering={handleAddOffering} /> */}
     </div>
   );
 };

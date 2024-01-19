@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom"
 
-const CreateOffer = ({ onSave }) => {
+const CreateOffer = () => {
     const [formData, setFormData] = useState({
         userId: 1, //user ID 1 Ramadhika
         weddingOfferName: '',
         weddingOfferAuthor: '',
-        weddingOfferPrice: parseInt(''),
+        weddingOfferPrice: '',
         weddingOfferDescription: '',
         weddingOfferImg: '',
     });
@@ -23,38 +23,36 @@ const CreateOffer = ({ onSave }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         // Make a POST request to your API endpoint
         fetch('http://localhost:3000/wedding-offers', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
         })
-          .then((response) => response.json())
-          .then((data) => {
-            // Call the onSave function passed from the parent component
-            onSave(data);
-            // Optionally, you can reset the form after submitting
-            setFormData({
-              weddingOfferName: '',
-              weddingOfferAuthor: '',
-              weddingOfferPrice: parseInt(''),
-              weddingOfferDescription: '',
-              weddingOfferImg: '',
+            .then((response) => response.json())
+            .then((data) => {
+                // Optionally, you can reset the form after submitting
+                setFormData({
+                    weddingOfferName: '',
+                    weddingOfferAuthor: '',
+                    weddingOfferPrice: '',
+                    weddingOfferDescription: '',
+                    weddingOfferImg: '',
+                });
+            })
+            .catch((error) => {
+                console.error('Error adding wedding offer:', error);
             });
-          })
-          .catch((error) => {
-            console.error('Error adding wedding offer:', error);
-          });
-      };
+    };
 
     return (
         <div className="container-sm">
             <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="userID">
-                    <Form.Label>User</Form.Label>
+                <Form.Label className='fs-3 mb-4 border-bottom w-100'>Create New Wedding Offer</Form.Label>
+                <Form.Group controlId="userID">
                     <Form.Control
                         type="text"
                         name="user"
@@ -116,15 +114,17 @@ const CreateOffer = ({ onSave }) => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Save
-                </Button>
+                <div className="mt-4 w-100">
+                    <Button variant="primary" type="submit" className='mx-2'>
+                        Save
+                    </Button>
 
-                <Button className='btn-secondary'>
-                    <Link to="/admin" className="nav-link">
-                        Back
-                    </Link>
-                </Button>
+                    <Button className='btn-secondary'>
+                        <Link to="/admin" className="nav-link">
+                            Back
+                        </Link>
+                    </Button>
+                </div>
             </Form>
         </div>
 

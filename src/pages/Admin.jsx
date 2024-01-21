@@ -8,8 +8,8 @@ const Admin = () => {
   const [selectedWeddingOffer, setSelectedWeddingOffer] = useState({ id: null, userId: "", weddingOfferName: "", weddingOfferAuthor: "", weddingOfferPrice: "", weddingOfferDescription: "" });
 
   /* Pagination */
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  /* const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); */
 
   useEffect(() => {
     fetch('http://localhost:3000/wedding-offers')
@@ -25,7 +25,7 @@ const Admin = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, [currentPage, itemsPerPage]);
+  });
 
   const handleEditClick = (weddingOffer) => {
     setSelectedWeddingOffer(weddingOffer);
@@ -38,13 +38,13 @@ const Admin = () => {
 
   const handleSaveChanges = () => {
     const { id, userId, weddingOfferName, weddingOfferAuthor, weddingOfferPrice, weddingOfferDescription, weddingOfferImg } = selectedWeddingOffer;
-  
+
     fetch(`http://localhost:3000/wedding-offers/${userId}/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ weddingOfferName, weddingOfferPrice, weddingOfferDescription, weddingOfferImg }), // Send the properties you want to update
+      body: JSON.stringify({ weddingOfferName, weddingOfferPrice, weddingOfferDescription, weddingOfferImg }), // Send the properties to update
     })
       .then((res) => {
         if (!res.ok) {
@@ -62,16 +62,38 @@ const Admin = () => {
         console.error('Error updating Wedding Offer:', error);
       });
   };
-  
-  /* Pagination Handler */
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
+
+  const handleDelete = (userId, id) => {
+    // Send a DELETE request to delete the wedding offer endpoint
+    fetch(`http://localhost:3000/wedding-offers/${userId}/${id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        // Update the local state
+        setWeddingOffers((prevWeddingOffers) =>
+          prevWeddingOffers.filter((weddingOffer) => weddingOffer.id !== id)
+        );
+        alert('Wedding offer deleted successfully!');
+      })
+      .catch((error) => {
+        console.error('Error deleting Wedding Offer:', error);
+        alert('Error deleting wedding offer');
+      });
   };
+
+
+  /* Pagination Handler */
+  /* const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }; */
 
   return (
     <div className='container-sm'>
       <div className="mb-4">
-      <AddOfferButton />
+        <AddOfferButton />
       </div>
       <Table striped bordered hover variant="dark">
         {/* Table content */}
@@ -88,7 +110,7 @@ const Admin = () => {
         <tbody>
           {weddingOffers.length === 0 ? (
             <tr>
-              <td colSpan="5">Loading...</td>
+              <td colSpan="5">No Data, Please Regist and create Offer data first</td>
             </tr>
           ) : (
             weddingOffers.map((weddingOffer) => (
@@ -100,10 +122,18 @@ const Admin = () => {
                 <td>{weddingOffer.weddingOfferPrice}</td>
                 <td>{weddingOffer.weddingOfferDescription}</td>
                 <td>
-                  <Button variant="primary" onClick={() => handleEditClick(weddingOffer)}>
+                  <Button variant="primary"
+                    onClick={() => handleEditClick(weddingOffer)}
+                    className='me-3'
+                  >
                     Edit
-                  </Button>{' '}
-                  <Button variant="danger">Delete</Button>{' '}
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDelete(weddingOffer.userId, weddingOffer.id)}
+                  >
+                    Delete
+                  </Button>
                 </td>
               </tr>
             ))
@@ -132,7 +162,7 @@ const Admin = () => {
         <Modal.Body>
           <Form>
             <Form.Group controlId="formName">
-            <Form.Label>ID Offer</Form.Label>
+              <Form.Label>ID Offer</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Post ID"
@@ -176,7 +206,6 @@ const Admin = () => {
                 onChange={(e) => setSelectedWeddingOffer({ ...selectedWeddingOffer, weddingOfferImg: e.target.value })}
               />
             </Form.Group>
-            {/* Add more form fields as needed */}
           </Form>
         </Modal.Body>
         <Modal.Footer>

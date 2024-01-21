@@ -1,9 +1,7 @@
-//import './App.css'
 import '../src/assets/styles/global.css'
 import "../src/assets/styles/reset.css"
-// import NavigationBars from './components/NavigationBar.jsx'
 import Home from './pages/Home.jsx'
-import Login from "./pages/Login"
+import Register from "./pages/Register"
 import NavigationBar from './components/NavigationBar.jsx'
 import { Routes, Route } from "react-router-dom";
 import Admin from './pages/Admin.jsx'
@@ -15,7 +13,7 @@ function App() {
       <NavigationBar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="admin" element={<Admin />} />
         <Route path='add-offer' element={<CreateOffer/>}/>
       </Routes>

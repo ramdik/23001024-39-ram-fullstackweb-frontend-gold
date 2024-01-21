@@ -9,3 +9,6 @@
     width: 35em;
   }
   
+  .card-text {
+    flex: 2;
+  }

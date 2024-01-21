@@ -44,9 +44,9 @@ const Cards = () => {
       {weddingOffers.map((weddingOffer) => (
         <Card key={weddingOffer.id} className='card'>
           <Card.Img variant="top" src={weddingOffer.weddingOfferImg} className='img-thumbnail max-width: 100%'/>
-          <Card.Body>
+          <Card.Body className='d-flex flex-column'>
             <Card.Title>{weddingOffer.weddingOfferName}</Card.Title>
-            <Card.Text>
+            <Card.Text className='card-text'>
               {weddingOffer.weddingOfferDescription}.
             </Card.Text>
             <div className="d-flex justify-content-between">

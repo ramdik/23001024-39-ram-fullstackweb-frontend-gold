@@ -1,9 +1,10 @@
-// components/DataForm.js
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 
 const CreateOffer = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         userId: 1, //user ID 1 Ramadhika
         weddingOfferName: '',
@@ -24,7 +25,7 @@ const CreateOffer = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Make a POST request to your API endpoint
+        // Make a POST request to API endpoint
         fetch('http://localhost:3000/wedding-offers', {
             method: 'POST',
             headers: {
@@ -34,7 +35,7 @@ const CreateOffer = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                // Optionally, you can reset the form after submitting
+                // reset the form after submitting
                 setFormData({
                     weddingOfferName: '',
                     weddingOfferAuthor: '',
@@ -42,6 +43,7 @@ const CreateOffer = () => {
                     weddingOfferDescription: '',
                     weddingOfferImg: '',
                 });
+                navigate('/admin');
             })
             .catch((error) => {
                 console.error('Error adding wedding offer:', error);

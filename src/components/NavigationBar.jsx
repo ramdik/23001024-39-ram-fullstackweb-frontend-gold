@@ -13,8 +13,8 @@ const NavigationBars = () => {
             <Link to="/" className="nav-link">
               Home
             </Link>
-            <Link to="/login" className="nav-link">
-              Login
+            <Link to="/register" className="nav-link">
+              Register
             </Link>
             <Link to="/admin" className="nav-link">
               Admin Test
